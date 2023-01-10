@@ -1,7 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
+import { UserType } from "./server";
+import http from "node:http";
 
-export const createUser = (users, req, res) => {
-    let body;
+export const createUser = (users: Array<UserType>, req: http.IncomingMessage, res: http.ServerResponse) => {
+    let body: string;
 
     req.on("data", (data) => {
       body = data.toString();
@@ -12,7 +14,7 @@ export const createUser = (users, req, res) => {
       if (user.username && user.age && user.hobbies) {
         user.id = uuidv4();
         users.push(user);
-        res.statusCode;
+        res.statusCode = 201;
         res.end(JSON.stringify(user));
         return;
       }

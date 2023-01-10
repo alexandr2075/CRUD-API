@@ -1,5 +1,8 @@
-export const putUser = (users, idFromPath, req, res) => {
-    let body;
+import http from "node:http";
+import { UserType } from "./server";
+
+export const putUser = (users: Array<UserType>, idFromPath: string | undefined, req: http.IncomingMessage, res: http.ServerResponse) => {
+    let body: string;
       req.on("data", (data) => {
         
         body = data.toString();
@@ -10,7 +13,7 @@ export const putUser = (users, idFromPath, req, res) => {
 
             users[index] = updateUser;
             res.statusCode;
-            res.end(JSON.stringify(user));
+            res.end(JSON.stringify(updateUser));
             return;
           } else {
             res.statusCode = 400;

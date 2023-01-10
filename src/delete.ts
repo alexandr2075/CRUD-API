@@ -1,4 +1,7 @@
-export const deleteUser = (users, idFromPath, res) => {
+import http from "node:http";
+import { UserType } from "./server";
+
+export const deleteUser = (users: Array<UserType>, idFromPath: string | undefined, res: http.ServerResponse) => {
     users.forEach((user, index) => {
         if (user.id === idFromPath) {
           users.splice(index, 1);
