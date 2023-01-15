@@ -1,0 +1,25 @@
+import http from "node:http";
+import { UserType } from ".";
+
+export const putUser = (users: Array<UserType>, idFromPath: string | undefined, req: http.IncomingMessage, res: http.ServerResponse) => {
+  let body: string;
+  req.on("data", (data) => {
+
+    body = data.toString();
+
+    users.forEach((user, index) => {
+      if (user.id === idFromPath) {
+        const updateUser = JSON.parse(body);
+        updateUser.id = idFromPath;
+        users[index] = updateUser;
+        res.statusCode;
+        res.end(JSON.stringify(updateUser));
+        return;
+      } else {
+        res.statusCode = 400;
+        res.end("Not such user");
+      }
+
+    });
+  });
+}
